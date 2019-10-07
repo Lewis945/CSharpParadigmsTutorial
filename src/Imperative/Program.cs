@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace ConsoleApp1
+namespace Imperative
 {
     public class Program
     {
@@ -57,7 +57,7 @@ namespace ConsoleApp1
                 if (splitLine.Length == 1)
                     continue;
 
-                data[j] = line.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+                data[j] = splitLine;
                 j++;
             }
 
