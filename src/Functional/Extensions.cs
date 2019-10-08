@@ -42,7 +42,7 @@ namespace Functional
             }
         }
 
-        public static TAggregate Aggregate<TSource, TAggregate>(
+        public static TAggregate Reduce<TSource, TAggregate>(
             this IEnumerable<TSource> source,
             Func<TAggregate, TSource, int, TAggregate> aggregator)
         {

@@ -35,7 +35,7 @@ namespace Functional
         private static IEnumerable<string[]> ParseFile(this IEnumerable<string> data, char[] separator, bool ignoreHeaders = false)
         {
             return data
-                .Filter((item, index) => ignoreHeaders ? index != 0 : true)
+                .Filter((item, index) => !ignoreHeaders || index != 0)
                 .Map((item, index) => item.Split(separator, StringSplitOptions.RemoveEmptyEntries))
                 .Filter((item, index) => item.Length > 1);
         }
@@ -61,7 +61,7 @@ namespace Functional
 
         private static DataItem GetMinSpreadItem(this IEnumerable<DataItem> data)
         {
-            return data.Aggregate<DataItem, DataItem>((aggregate, item, index) =>
+            return data.Reduce<DataItem, DataItem>((aggregate, item, index) =>
             {
                 if (item.Item4 < (aggregate?.Item4 ?? int.MaxValue))
                     return item;
