@@ -26,6 +26,11 @@ namespace Imperative
             var data = ParseData(fileData, columns);
             var itemWithMinSpread = GetDataItemWithMinSpread(data);
 
+            Print(data, itemWithMinSpread, message);
+        }
+
+        private static void Print(object[][] data, object[] itemWithMinSpread, string message)
+        {
             Console.WriteLine("File data:");
 
             for (int i = 0; i < data.Length; i++)
