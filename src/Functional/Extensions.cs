@@ -48,6 +48,8 @@ namespace Functional
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
+            if (aggregator == null)
+                throw new ArgumentNullException(nameof(aggregator));
 
             TAggregate aggregate = default(TAggregate);
             int index = 0;
