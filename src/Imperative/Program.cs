@@ -66,7 +66,7 @@ namespace Imperative
                 j++;
             }
 
-            return TrimArray<string>(data);
+            return TrimArray(data);
         }
 
         private static object[][] ParseData(string[][] data, int[] columnIndecies)
@@ -113,7 +113,7 @@ namespace Imperative
             return data[minIndex];
         }
 
-        private static T[][] TrimArray<T>(T[][] data)
+        private static string[][] TrimArray(string[][] data)
         {
             var length = 0;
             for (int i = 0; i < data.Length; i++)
@@ -126,7 +126,7 @@ namespace Imperative
                 }
             }
 
-            var newData = new T[length][];
+            var newData = new string[length][];
             for (int i = 0; i < length; i++)
             {
                 newData[i] = data[i];
