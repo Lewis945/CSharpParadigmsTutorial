@@ -8,28 +8,25 @@ namespace Functional
 {
     public static class Program
     {
-        private static Regex _digitsOnly = new Regex(@"[^\d]");
+        private static readonly Regex _digitsOnly = new Regex(@"[^\d]");
+        private static readonly char[] _separators = new char[] { ' ', '\t' };
 
         public static void Main(string[] args)
         {
-            Run(@"Data\weather.dat", new int[] { 0, 1, 2 }, "Day with min spread");
+            Run(@"Data\weather.dat", new int[] { 0, 1, 2 }, PrintData("Day with min spread", GetMinSpreadItem));
 
             Console.WriteLine($"-----------------------");
 
-            Run(@"Data\football.dat", new int[] { 1, 6, 8 }, "Team with min spread");
+            Run(@"Data\football.dat", new int[] { 1, 6, 8 }, PrintData("Team with min spread", GetMinSpreadItem));
 
             Console.ReadKey();
         }
 
-        private static void Run(string path, int[] columns, string message)
+        private static void Run(string path, int[] columns, Action<IEnumerable<DataItem>> print)
         {
-            var print = PrintData(message, GetMinSpreadItem);
-
-            var data = File.ReadLines(path)
-                .ParseFile(new char[] { ' ', '\t' }, true)
-                .ParseData(columns);
-
-            print(data);
+            print(File.ReadLines(path)
+                .ParseFile(_separators, true)
+                .ParseData(columns));
         }
 
         private static IEnumerable<string[]> ParseFile(this IEnumerable<string> data, char[] separator, bool ignoreHeaders = false)
